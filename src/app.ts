@@ -4,6 +4,7 @@ import { connectDB } from "./config/db";
 import { routes } from "./routes";
 import { config as dotenv } from "dotenv";
 import morgan from 'morgan'
+import swaggerDocs from "./swagger";
 
 dotenv();
 
@@ -21,9 +22,10 @@ const main = async () => {
     // app routes
     routes(app);
 
-    app.listen(process.env.PORT, () =>
-      console.log(`server started on port ${process.env.PORT}`)
-    );
+    app.listen(typeof process.env.PORT === "string" && parseInt(process.env.PORT), () => {
+        console.log(`server has started on port ${process.env.PORT}`)
+        swaggerDocs(app, Number(process.env.PORT))
+    });
   } catch (err) {
     process.exit(1);
   }
