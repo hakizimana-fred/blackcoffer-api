@@ -3,6 +3,7 @@ import helmet from "helmet";
 import { connectDB } from "./config/db";
 import { routes } from "./routes";
 import { config as dotenv } from "dotenv";
+import morgan from 'morgan'
 
 dotenv();
 
@@ -15,6 +16,8 @@ const main = async () => {
     // app middlewares
     app.use(express.json());
     app.use(helmet());
+    process.env.NODE_ENV === "development" && app.use(morgan('dev'))
+
     // app routes
     routes(app);
 
