@@ -2,8 +2,7 @@
 Nodejs Api with express and mongoose ORM
 This api uses typescript
 
-## how to use
-
+## How to use
 To get started with this api follow the steps below
 
 ```shell
